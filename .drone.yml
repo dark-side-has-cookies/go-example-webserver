@@ -6,9 +6,19 @@ pipeline:
     commands:
       - docker build -t dark13side/example-webserver .
 
-test:
-  image: docker
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-  commands:
-    docker run amouat/example-webserver /test.sh	
+  test:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      -  docker run amouat/example-webserver /test.sh
+
+  push:
+    image: docker
+    environment:
+      - PASS=${HUB_PASS}
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker login -u dark13side -p $PASS
+      - docker push dark13side/example-webserver
