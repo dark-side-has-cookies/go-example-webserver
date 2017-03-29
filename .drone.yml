@@ -29,4 +29,4 @@ pipeline:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - docker pull dark13side/example-webserver
-      - docker stack deploy -c ./docker-compose.yml example-webserverr
+      - docker stack deploy -c ./docker-compose.yml example-webserver
