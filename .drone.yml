@@ -21,4 +21,11 @@ pipeline:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - docker login -u dark13side -p $PASS
-      - docker push dark13side/example-webserver
+      - docker push dark13side/example-webserve
+  deploy:
+    image: docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker pull dark13side/example-webserver
+      - docker stack deploy -c ./docker-compose.yml example-webserverr
